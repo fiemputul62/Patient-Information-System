@@ -1,0 +1,41 @@
+CREATE DATABASE HospitalDB;
+USE HospitalDB;
+
+-- Table to store patient basic information
+CREATE TABLE patients (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL
+);
+
+-- Table to store health information
+CREATE TABLE health_records (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    patient_id INT,
+    purpose VARCHAR(50) NOT NULL,
+    operation_purpose VARCHAR(255),
+    operation_date DATE,
+    operation_time TIME,
+    responsible_doctor VARCHAR(100),
+    health_problem VARCHAR(255),
+    checkup_date DATE,
+    checkup_time TIME,
+    fees DECIMAL(10, 2),
+    FOREIGN KEY (patient_id) REFERENCES patients(id)
+);
+
+-- Table to store payment information
+CREATE TABLE payments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    patient_id INT,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    amount_paid DECIMAL(10, 2) NOT NULL,
+    amount_due DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (patient_id) REFERENCES patients(id)
+);
+/*Database Setup
+*/
